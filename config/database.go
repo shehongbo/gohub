@@ -1,10 +1,14 @@
 package config
 
-import "gohub/pkg/config"
+import (
+	"gohub/pkg/config"
+)
 
-func int() {
+func init() {
+
 	config.Add("database", func() map[string]interface{} {
 		return map[string]interface{}{
+
 			// 默认数据库
 			"connection": config.Env("DB_CONNECTION", "mysql"),
 
