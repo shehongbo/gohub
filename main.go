@@ -7,7 +7,6 @@ import (
 	"gohub/bootstrap"
 	btsConfig "gohub/config"
 	"gohub/pkg/config"
-	"gohub/pkg/verifycode"
 )
 
 func init() {
@@ -44,8 +43,6 @@ func main() {
 
 	// 初始化路由绑定
 	bootstrap.SetupRoute(router)
-
-	verifycode.NewVerifyCode().SendSMS("00013800138001")
 
 	// 运行服务
 	err := router.Run(":" + config.Get("app.port"))
