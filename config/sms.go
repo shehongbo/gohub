@@ -1,6 +1,8 @@
 // Package config 站点配置信息
 package config
 
+import "gohub/pkg/config"
+
 func init() {
 	config.Add("sms", func() map[string]interface{} {
 		return map[string]interface{}{
