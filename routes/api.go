@@ -25,6 +25,9 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			authGroup.POST("/verify-code/captcha", vcc.ShowCaptcha)
 			//发送手机验证码
 			authGroup.POST("/verify-code/phone", vcc.SendUsingPhone)
+			//发送邮件验证码
+			authGroup.POST("/verify-code/email", vcc.SendUsingEmail)
+
 		}
 	}
 }
