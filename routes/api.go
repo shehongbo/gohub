@@ -18,6 +18,10 @@ func RegisterAPIRoutes(r *gin.Engine) {
 			authGroup.POST("/signup/phone/exist", suc.IsPhoneExist)
 			//判断Email是否已注册
 			authGroup.POST("/signup/email/exist", suc.IsEmailExist)
+			//注册手机号
+			authGroup.POST("/signup/using-phone", suc.SignupUsingPhone)
+			//注册邮箱
+			authGroup.POST("/signup/using-email", suc.SignupUsingEmail)
 
 			// 发送验证码
 			vcc := new(auth.VerifyCodeController)

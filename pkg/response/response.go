@@ -40,6 +40,11 @@ func Created(c *gin.Context, data interface{}) {
 	})
 }
 
+// CreatedJSON 响应 201 和 JSON 数据
+func CreatedJSON(c *gin.Context, data interface{}) {
+	c.JSON(http.StatusCreated, data)
+}
+
 // Abort404 响应 404，未传参 msg 时使用默认消息
 func Abort404(c *gin.Context, msg ...string) {
 	c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
