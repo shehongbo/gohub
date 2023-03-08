@@ -4,12 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"gohub/app/http/middlewares"
 	"gohub/bootstrap"
 	btsConfig "gohub/config"
-	"gohub/pkg/auth"
 	"gohub/pkg/config"
-	"gohub/pkg/response"
 )
 
 func init() {
@@ -46,11 +43,6 @@ func main() {
 
 	// 初始化路由绑定
 	bootstrap.SetupRoute(router)
-
-	router.GET("/test_auth", middlewares.AuthJWT(), func(c *gin.Context) {
-		userModel := auth.CurrentUser(c)
-		response.Data(c, userModel)
-	})
 
 	// 运行服务
 	err := router.Run(":" + config.Get("app.port"))
