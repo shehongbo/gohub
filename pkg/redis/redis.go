@@ -1,11 +1,13 @@
+// Package redis 工具包
 package redis
 
 import (
 	"context"
-	"github.com/go-redis/redis/v8"
 	"gohub/pkg/logger"
 	"sync"
 	"time"
+
+	redis "github.com/go-redis/redis/v8"
 )
 
 // RedisClient Redis 服务
@@ -14,13 +16,7 @@ type RedisClient struct {
 	Context context.Context
 }
 
-// Ping 用以测试 redis 连接是否正常
-func (rds RedisClient) Ping() error {
-	_, err := rds.Client.Ping(rds.Context).Result()
-	return err
-}
-
-// once 确保全局的Redis 对象只实例一次
+// once 确保全局的 Redis 对象只实例一次
 var once sync.Once
 
 // Redis 全局 Redis，使用 db 1
@@ -38,7 +34,7 @@ func NewClient(address string, username string, password string, db int) *RedisC
 
 	// 初始化自定的 RedisClient 实例
 	rds := &RedisClient{}
-	// 使用默认的 contxt
+	// 使用默认的 context
 	rds.Context = context.Background()
 
 	// 使用 redis 库里的 NewClient 初始化连接
@@ -49,11 +45,17 @@ func NewClient(address string, username string, password string, db int) *RedisC
 		DB:       db,
 	})
 
-	// 测试连接
+	// 测试一下连接
 	err := rds.Ping()
 	logger.LogIf(err)
 
 	return rds
+}
+
+// Ping 用以测试 redis 连接是否正常
+func (rds RedisClient) Ping() error {
+	_, err := rds.Client.Ping(rds.Context).Result()
+	return err
 }
 
 // Set 存储 key 对应的 value，且设置 expiration 过期时间
@@ -99,7 +101,7 @@ func (rds RedisClient) Del(keys ...string) bool {
 }
 
 // FlushDB 清空当前 redis db 里的所有数据
-func (rds RedisClient) FlushDb() bool {
+func (rds RedisClient) FlushDB() bool {
 	if err := rds.Client.FlushDB(rds.Context).Err(); err != nil {
 		logger.ErrorString("Redis", "FlushDB", err.Error())
 		return false
@@ -149,7 +151,7 @@ func (rds RedisClient) Decrement(parameters ...interface{}) bool {
 			return false
 		}
 	default:
-		logger.ErrorString("Redis", "Increment", "参数过多")
+		logger.ErrorString("Redis", "Decrement", "参数过多")
 		return false
 	}
 	return true
