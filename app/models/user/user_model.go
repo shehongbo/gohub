@@ -23,6 +23,12 @@ func (userModel *User) Create() {
 	database.DB.Create(&userModel)
 }
 
+// 保存信息
+func (userModel *User) Save() (rowsAffected int64) {
+	result := database.DB.Save(&userModel)
+	return result.RowsAffected
+}
+
 // ComparePassword 密码是否正确
 func (userModel *User) ComparePassword(_password string) bool {
 	return hash.BcryptCheck(_password, userModel.Password)
@@ -41,5 +47,11 @@ func GetByMulti(loginID string) (userModel User) {
 		Or("email = ?", loginID).
 		Or("name  = ?", loginID).
 		First(&userModel)
+	return
+}
+
+// GetByEmail 通过 Email 来获取用户
+func GetByEmail(email string) (userModel User) {
+	database.DB.Where("email = ?", email).First(&userModel)
 	return
 }
