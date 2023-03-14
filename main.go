@@ -51,6 +51,7 @@ func main() {
 		cmd.CmdKey,
 		cmd.CmdPlay,
 		make.CmdMake,
+		make.CmdMakeModel,
 	)
 
 	// 配置默认运行 Web 服务
