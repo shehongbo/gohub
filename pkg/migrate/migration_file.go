@@ -39,7 +39,6 @@ func getMigrationFile(name string) MigrationFile {
 
 // isNotMigrated 判断迁移是否已执行
 func (mfile MigrationFile) isNotMigrated(migrations []Migration) bool {
-
 	for _, migration := range migrations {
 		if migration.Migration == mfile.FileName {
 			return false

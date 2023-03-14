@@ -65,10 +65,8 @@ func (migrator *Migrator) Up() {
 
 	// 可以通过此值来判断数据库是否已是最新
 	runed := false
-
 	// 对迁移文件进行遍历，如果没有执行过，就执行 up 回调
 	for _, mfile := range migrateFiles {
-
 		// 对比文件名称，看是否已经运行过
 		if mfile.isNotMigrated(migrations) {
 			migrator.runUpMigration(mfile, bacth)
@@ -99,10 +97,10 @@ func (migrator *Migrator) readAllMigrationFiles() []MigrationFile {
 
 		// 加个判断，确保迁移文件可用，再放进 migrateFiles 数组中
 		if len(mfile.FileName) > 0 {
-			migrationFiles = append(migrateFiles, mfile)
+			migrateFiles = append(migrateFiles, mfile)
 		}
-	}
 
+	}
 	// 返回排序好的『MigrationFile』数组
 	return migrateFiles
 }
