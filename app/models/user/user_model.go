@@ -11,8 +11,8 @@ type User struct {
 
 	Name string `json:"name,omitempty"`
 
-	Email    string `json:"-"` //指示 JSON 解析器忽略字段
-	Phone    string `json:"-"`
+	Email    string `json:"email"` //指示 JSON 解析器忽略字段
+	Phone    string `json:"phone"`
 	Password string `json:"-"`
 
 	models.CommonTimestampsField
