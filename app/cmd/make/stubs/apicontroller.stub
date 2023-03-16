@@ -2,7 +2,6 @@ package v1
 
 import (
     "gohub/app/models/{{PackageName}}"
-    "gohub/app/policies"
     "gohub/app/requests"
     "gohub/pkg/response"
 
