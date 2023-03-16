@@ -15,8 +15,15 @@ type TopicsController struct {
 }
 
 func (ctrl *TopicsController) Index(c *gin.Context) {
-	topics := topic.All()
-	response.Data(c, topics)
+	request := requests.PaginationRequest{}
+	if ok := requests.Validate(c, &request, requests.Pagination); !ok {
+		return
+	}
+	data, paper := topic.Paginate(c, 10)
+	response.Json(c, gin.H{
+		"data":  data,
+		"paper": paper,
+	})
 }
 
 func (ctrl *TopicsController) Show(c *gin.Context) {
