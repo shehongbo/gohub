@@ -20,7 +20,7 @@ func NewRedisStore(address string, username string, password string, db int) *Re
 }
 
 func (s *RedisStore) Set(key string, value string, expireTime time.Duration) {
-	s.RedisClient.Set(key, value, expireTime)
+	s.RedisClient.Set(s.KeyPrefix+key, value, expireTime)
 }
 
 func (s *RedisStore) Get(key string) string {

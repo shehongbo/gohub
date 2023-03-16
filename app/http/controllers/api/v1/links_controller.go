@@ -12,8 +12,7 @@ type LinksController struct {
 }
 
 func (ctrl *LinksController) Index(c *gin.Context) {
-	links := link.All()
-	response.Data(c, links)
+	response.Data(c, link.AllCached())
 }
 
 func (ctrl *LinksController) Show(c *gin.Context) {
@@ -22,5 +21,5 @@ func (ctrl *LinksController) Show(c *gin.Context) {
 		response.Abort404(c)
 		return
 	}
-	response.Data(c, linkModel)
+	response.Data(c, link.AllCached())
 }
