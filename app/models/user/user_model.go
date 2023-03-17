@@ -11,6 +11,10 @@ type User struct {
 
 	Name string `json:"name,omitempty"`
 
+	City         string `json:"city,omitempty"`
+	Introduction string `json:"introduction,omitempty"`
+	Avatar       string `json:"avatar,omitempty"`
+
 	Email    string `json:"email"` //指示 JSON 解析器忽略字段
 	Phone    string `json:"phone"`
 	Password string `json:"-"`
