@@ -22,10 +22,12 @@ func SetupRoute(router *gin.Engine) {
 	setup404Handler(router)
 }
 
+// 注册全局中间件
 func registerGlobalMiddleWare(router *gin.Engine) {
 	router.Use(
 		middlewares.Logger(),
 		middlewares.Recovery(),
+		middlewares.ForceUA(),
 	)
 }
 
